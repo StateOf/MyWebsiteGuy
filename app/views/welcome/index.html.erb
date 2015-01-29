@@ -44,8 +44,8 @@
 </div>
 
 <div>
-<% @quotes.each do |key, value| %>
-  <p>"<%= value %>"</p>
-  <p class="text-muted"><em>-<%= key %></em></p>
+<% @quotes.each do |author, quote| %>
+  <p>"<%= quote %>"</p>
+  <p class="text-muted"><em>-<%= author %></em></p>
   <% end %>
 </div>
