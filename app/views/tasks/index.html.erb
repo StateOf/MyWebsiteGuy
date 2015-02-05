@@ -1,3 +1,14 @@
 <div class="page-header">
-  <h1>Tasks</h1>
+  <h1>Listing Tasks</h1>
 </div>
+
+<div>
+  <h3>Description</h3>
+</div>
+<% @tasks.each do |task| %>
+<div><%= link_to 'Edit', edit_task_path(@task) %></div>
+<% end %>
+<br/>
+<div><%= link_to 'Delete this post', tasks_path(@task), method: :delete, data: {confirm: "Are you sure?"} %></div>
+<br/>
+<div><%= link_to 'To the Directory', tasks_path %></div>
