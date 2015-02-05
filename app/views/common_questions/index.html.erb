@@ -3,17 +3,18 @@
 </div>
 <div>
   <ul>
-    <% @faq.each do |question, answer| %>
-      <li><%= question %></li>
-      <% end %>
+    <% @qa[0].each do |question, slug| %>
+      <li><%= link_to question, "##{slug}" %></li>
+    <% end %>
   </ul>
 </div>
-<div class="row">
-  <div class="col-md-8">
-  <% @faq.each do |question, answer| %>
+<div class ="container-fluid">
+  <div class="row">
+    <% @qa[1].each do |question, answer| %>
+    <%= content_tag :a, '', name: question.parameterize %>
     <h3><%= question %></h3>
     <p> <%= answer %> </p>
-    <p>Top</p>
+    <div><%= link_to "top", "#" %></div>
     <% end %>
   </div>
 </div>
