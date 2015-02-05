@@ -4,11 +4,11 @@
 
 <div>
   <h3>Description</h3>
+  <p>test task</p>
 </div>
-<% @tasks.each do |task| %>
-<div><%= link_to 'Edit', edit_task_path(@task) %></div>
-<% end %>
-<br/>
-<div><%= link_to 'Delete this post', tasks_path(@task), method: :delete, data: {confirm: "Are you sure?"} %></div>
-<br/>
-<div><%= link_to 'To the Directory', tasks_path %></div>
+<ul class="list-inline">
+  <li><%= link_to 'New Task', new_task_path(@task) %></li>
+  <li><%= link_to 'Show', tasks_path(@task) %></li>
+  <li><%= link_to 'Edit Task' %></li>
+  <li><%= link_to 'Destroy', tasks_path(@task), method: :delete, data: {confirm: "Are you sure?"} %></li>
+</ul>
