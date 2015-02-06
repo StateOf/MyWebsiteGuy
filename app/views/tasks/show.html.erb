@@ -1,0 +1,7 @@
+<h1><%= @task.description %></h1>
+<br/>
+<div><%= link_to 'Edit', edit_task_path(@task) %></div>
+<br/>
+<div><%= link_to 'Delete this post', task_path(@task), method: :delete, data: {confirm: "Are you sure?"} %></div>
+<br/>
+<div><%= link_to 'To the Directory', tasks_path %></div>

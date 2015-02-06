@@ -9,9 +9,6 @@ class CommonQuestionsController < ApplicationController
 
     @quotes = [common_q_1, common_q_2, common_q_3]
 
-    # slug = CommonQuestion.slug
-    # question = CommonQuestion.question
-    # @qa = [slug, question]
   end
 
 end
