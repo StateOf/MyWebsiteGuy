@@ -2,12 +2,12 @@
   <h1>Listing Tasks</h1>
 </div>
 
-<div>
-  <h3>Description</h3>
-  <% @tasks.each do |task| %>
+<h3>Description</h3>
+
+<% @tasks.each do |task| %>
   <p><%= link_to task.description, task_path(task) %></p>
-  <% end %>
-</div>
+<% end %>
+
 <ul class="list-inline">
   <li><%= link_to 'New Task', new_task_path(@task) %></li>
   <li><%= link_to 'Show', tasks_path(@task) %></li>
