@@ -13,9 +13,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)
-    task.save
-    redirect_to tasks_path
+    @task = Task.new(task_params)
+    if @task.save
+      flash[:notice] = "Task was successfully created"
+      redirect_to @task
+    end
   end
 
   def edit
