@@ -12,8 +12,8 @@
       <td><strong>Description</strong></td>
     </tr>
   </thead>
-<% @tasks.each do |task| %>
   <tbody>
+    <% @tasks.each do |task| %>
     <tr>
       <td>
         <%= link_to task.description, task_path(task) %>
@@ -23,6 +23,6 @@
         <%= link_to 'Destroy', task_path(task), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger" %>
       </td>
     </tr>
+    <% end %>
   </tbody>
 </table>
-<% end %>
