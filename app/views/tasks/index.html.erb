@@ -16,10 +16,13 @@
     <tr>
       <td>
         <% if task.complete == true %>
-          <s><%= link_to task.description, task_path(task) %></s>
+
+        <s><%= link_to task.description, task_path(task) %></s>
+
         <% else %>
-          <%= link_to task.description, task_path(task) %>
+        <%= link_to task.description, task_path(task) %>
         <% end %>
+
       </td>
       <td class="text-right">
 
