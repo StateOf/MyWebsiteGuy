@@ -7,20 +7,4 @@
   <li class="active">New Task</li>
 </ol>
 
-<%= form_for @task, html: {class: "form-horizontal"} do |f| %>
-  <div class="form-group">
-    <div class="col-md-2">
-      <%= f.label :description, class: "control-label"  %>
-    </div>
-    <div class="col-md-4">
-      <%= f.text_field :description, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class = "form-group">
-    <div class = "col-md-10 col-md-offset-2">
-      <%= f.submit "Create Task", class:"btn btn-primary" %>
-      <%= link_to "cancel", tasks_path(@tasks), class:"btn btn-default" %>
-    </div>
-  </div>
-<% end %>
+<%= render partial: "form", locals: { name_of_button: "Create Task" } %> 
