@@ -1,18 +1,28 @@
-<h1>Edit Task</h1>
+<div class="page-header">
+  <div class="pull-right">
+    <%= link_to 'Task List', tasks_path(@task), class:"btn btn-info" %>
+  </div>
+  <h1>Edit Task</h1>
+</div>
 
-<%= form_for @task do |f| %>
-  <div>
-    <%= f.label :description  %>
+<ol class="breadcrumb">
+  <li><%= link_to 'Tasks', tasks_path(@tasks) %></li>
+  <li class="active">Edit</li>
+</ol>
+
+<%= form_for @task, html: {class: "form-horizontal"} do |f| %>
+<div class="form-group">
+  <div class="col-md-2">
+  <%= f.label :description, class: "control-label" %>
   </div>
-  <div>
-    <%= f.text_field :description %>
+  <div class="col-md-4">
+    <%= f.text_field :description, class: "form-control" %>
   </div>
-  <div>
-    <%= f.submit "Update Task" %>
+</div>
+
+<div class="form-group">
+  <div class="col-md-10 col-md-offset-2">
+    <%= f.submit "Update Task", class:"btn btn-primary" %>
+    <%= link_to 'Back', tasks_path(@tasks), class:"btn btn-default" %>
   </div>
-<% end %>
-  <div>
-    <%= link_to 'Show', tasks_path(@task) %>
-    |
-    <%= link_to 'Back', tasks_path(@tasks) %>
-  </div>
+  <% end %>

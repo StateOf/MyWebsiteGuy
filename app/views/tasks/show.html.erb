@@ -1,7 +1,11 @@
-<h1><%= @task.description %></h1>
-<br/>
-<div><%= link_to 'Edit', edit_task_path(@task) %></div>
-<br/>
-<div><%= link_to 'Delete this post', task_path(@task), method: :delete, data: {confirm: "Are you sure?"} %></div>
-<br/>
-<div><%= link_to 'To the Directory', tasks_path %></div>
+<div class="page-header">
+  <div class="pull-right">
+    <%= link_to 'Edit', edit_task_path(@task), class:"btn btn-info" %>
+  </div>
+  <h1><%= @task.description %></h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Tasks', tasks_path(@tasks) %></li>
+  <li class="active"><%= @task.description %></li>
+</ol>
