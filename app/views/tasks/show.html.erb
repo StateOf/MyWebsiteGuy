@@ -17,5 +17,11 @@
 </ol>
 
 <div>
-    <p><strong>Due Date: </strong> <%= @task.due_date.strftime("%m/%d/%Y") %></p>
+    <p><strong>Due Date: </strong>
+      <% if @task.due_date %>
+      <%= @task.due_date.strftime("%m/%d/%Y") %>
+      <% else %>
+      <%= @task.due_date %>
+      <% end %>
+    </p>
 </div>

@@ -17,18 +17,20 @@
     <% @tasks.each do |task| %>
     <tr>
       <td>
-        <% if task.complete %>
-        <s><%= link_to task.description, task_path(task) %></s>
-        <% else %>
-        <%= link_to task.description, task_path(task) %>
-        <% end %>
-
+          <% if task.complete %>
+            <s><%= link_to task.description, task_path(task) %></s>
+          <% else %>
+            <%= link_to task.description, task_path(task) %>
+          <% end %>
       </td>
       <td>
+        <% if task.due_date %>
         <%= task.due_date.strftime("%m/%d/%Y") %>
+        <% else %>
+        <%= task.due_date %>
+        <% end %>
       </td>
       <td class="text-right">
-
         <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
         <%= link_to 'Delete', task_path(task), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger" %>
       </td>
