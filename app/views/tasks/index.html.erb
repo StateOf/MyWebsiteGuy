@@ -8,7 +8,9 @@
 <table class="table">
   <thead>
     <tr>
-      <td><strong>Description</strong></td>
+      <th class="col-md-2">Description</th>
+      <th>Due Date</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +25,9 @@
         <%= link_to task.description, task_path(task) %>
         <% end %>
 
+      </td>
+      <td>
+        <%= task.due_date.strftime("%m/%d/%Y") %>
       </td>
       <td class="text-right">
 

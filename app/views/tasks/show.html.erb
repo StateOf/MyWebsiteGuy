@@ -9,6 +9,9 @@
       <%= @task.description %>
     <% end %>
   </h1>
+  <h3>
+    Due Date: <%= @task.due_date.strftime("%m/%d/%Y") %>
+  </h3>
 </div>
 
 <ol class="breadcrumb">
