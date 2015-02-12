@@ -3,18 +3,19 @@
     <%= link_to 'Edit', edit_task_path(@task), class:"btn btn-info" %>
   </div>
   <h1>
-    <% if @task.complete == true %>
+    <% if @task.complete %>
       <s><%= @task.description %></s>
     <% else %>
       <%= @task.description %>
     <% end %>
   </h1>
-  <h3>
-    Due Date: <%= @task.due_date.strftime("%m/%d/%Y") %>
-  </h3>
 </div>
 
 <ol class="breadcrumb">
   <li><%= link_to 'Tasks', tasks_path(@tasks) %></li>
   <li class="active"><%= @task.description %></li>
 </ol>
+
+<div>
+    <p><strong>Due Date: </strong> <%= @task.due_date.strftime("%m/%d/%Y") %></p>
+</div>
