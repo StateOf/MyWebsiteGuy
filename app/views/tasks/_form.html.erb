@@ -1,6 +1,6 @@
 <%= form_for @task, html: {class: "form-horizontal"} do |f| %>
   <div class="form-group">
-    <div class="col-md-1">
+    <div class="col-md-2">
       <%= f.label :description, class: "control-label" %>
     </div>
     <div class="col-md-3">
@@ -9,7 +9,7 @@
   </div>
 
   <div class="form-group">
-    <div class="col-md-1">
+    <div class="col-md-2">
       <%= f.label :due_date, class: "control-label" %>
     </div>
     <div class="col-md-3">
@@ -20,7 +20,7 @@
 
   <% unless @task.new_record? %>
     <div class = "form-group">
-      <div class = "col-md-10 col-md-offset-1">
+      <div class = "col-md-10 col-md-offset-2">
         <%= f.check_box :complete  %>
         <%= f.label :complete, "Complete" %>
       </div>
@@ -28,7 +28,7 @@
   <% end %>
 
     <div class="form-group">
-      <div class="col-md-10 col-md-offset-1">
+      <div class="col-md-10 col-md-offset-2">
         <%= f.submit name_of_button, class: "btn btn-primary" %>
         <%= link_to 'cancel', tasks_path(@tasks), class:"btn btn-default" %>
       </div>

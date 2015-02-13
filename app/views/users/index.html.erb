@@ -8,10 +8,24 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="col-md-2" >Name</th>
-      <th>Email</th>
+      <th>
+        Name
+      </th>
+      <th>
+        Email
+      </th>
     </tr>
   </thead>
   <tbody>
+    <% @users.each do |user| %>
     <tr>
+      <td class="col-md-3">
+        <%= user.first_name %> <%= user.last_name %>
+      </td>
+      <td>
+        <%= link_to user.email, class:"mail_to" %>
+      </td>
     </tr>
+    <% end %>
+  </tbody>
+</table>
