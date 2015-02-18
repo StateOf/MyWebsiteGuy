@@ -28,13 +28,17 @@
 
   <div class="form-group">
     <div class="col-md-10 col-md-offset-2">
-      <% if params[:action] == "edit" %>
-        <%= f.submit name_of_button, class: "btn btn-primary" %>
-        <%= link_to 'Delete user', user_path(@user), method: :delete, data: {confirm: "are you sure?"}, class: "btn btn-danger" %>
-      <% else %>
-        <%= f.submit name_of_button, class: "btn btn-primary" %>
-      <% end %>
+      <%= f.submit name_of_button, class: "btn btn-primary" %>
       <%= link_to 'cancel', users_path(@users), class:"btn btn-default" %>
     </div>
   </div>
+  <% if params[:action] == "edit" %>
+  <div class="form-group">
+    <div class="col-md-3 col-md-offset-2 well">
+        <div class="text-center">
+          <%= link_to 'Delete user', user_path(@user), method: :delete, data: {confirm: "are you sure?"}, class: "btn btn-danger" %>
+        </div>
+    </div>
+  </div>
+  <% end %>
 <% end %>
