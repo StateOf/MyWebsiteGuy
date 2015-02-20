@@ -34,8 +34,8 @@
   </div>
   <% if params[:action] == "edit" %>
   <div class="form-group">
-    <div class="col-md-3 col-md-offset-2 well">
-        <div class="text-center">
+    <div class="col-md-3 col-md-offset-2">
+        <div class="text-center well">
           <%= link_to 'Delete user', user_path(@user), method: :delete, data: {confirm: "are you sure?"}, class: "btn btn-danger" %>
         </div>
     </div>
