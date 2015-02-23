@@ -17,6 +17,8 @@ class TasksController < ApplicationController
     if @task.save
       flash[:notice] = "Task was successfully created"
       redirect_to @task
+    else
+      render :new
     end
   end
 

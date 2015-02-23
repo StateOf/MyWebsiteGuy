@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Project was successfully created"
       redirect_to @project
     else
-      render :edit
+      render :new
     end
   end
 
@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Project was successfully updated"
       redirect_to @project
     else
-      render :show
+      render :edit
     end
   end
 

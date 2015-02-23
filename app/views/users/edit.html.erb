@@ -3,3 +3,11 @@
 </div>
 
  <%= render partial: "form", locals: {name_of_button: "Update user"} %>
+
+ <div class="row">
+   <div class="col-md-6 col-md-offset-2">
+       <div class="text-center well">
+         <%= link_to 'Delete user', user_path(@user), method: :delete, data: {confirm: "are you sure?"}, class: "btn btn-danger" %>
+       </div>
+   </div>
+ </div>
