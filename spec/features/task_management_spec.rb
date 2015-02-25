@@ -2,7 +2,10 @@ require "rails_helper"
 
 describe "the user using the tasks" do
   it "uses tasks complete" do
-    visit tasks_path
+    visit root_path
+
+    click_on "Tasks"
+
     expect(page).to have_content "Tasks"
 
     click_on "New Task"
@@ -29,7 +32,7 @@ describe "the user using the tasks" do
     visit tasks_path
 
     click_on "Delete"
-    save_and_open_page
+
     expect(page).to_not have_content "run"
     expect(page).to_not have_content "02/02/1983"
 
