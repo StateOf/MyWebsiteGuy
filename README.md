@@ -1,1 +1,5 @@
-[![Build Status](https://travis-ci.org/steve970/gCamp.svg)](https://travis-ci.org/steve970/gCamp)
+== README
+
+Travis CI: https://travis-ci.org/steve970/gCamp
+
+![](https://travis-ci.org/steve970/gCamp.svg)
