@@ -1,3 +1,3 @@
 ![](https://travis-ci.org/steve970/gCamp.svg)
 
-Travis CI: https://travis-ci.org/steve970/gCamp
+**Travis CI:**  [https://travis-ci.org/steve970/gCamp]
