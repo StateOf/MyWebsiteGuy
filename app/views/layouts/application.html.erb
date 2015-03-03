@@ -10,10 +10,22 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <%= link_to "gCamp", "/", class:"navbar-brand" %>
+
+      <% if current_user %>
+      <%= link_to "Sign Out", signout_path, class:"navbar-brand pull-right" %>
+      <%= link_to current_user.full_name, user_path(current_user), class:"navbar-brand pull-right" %>
+      <% else %>
+      <%= link_to "Sign In", sign_in_path, class:"navbar-brand pull-right" %>
+      <%= link_to "Sign Up", sign_up_path, class:"navbar-brand pull-right" %>
+      <% end %>
     </div>
   </nav>
 
   <div class="container">
+
+  <% if flash[:error] %>
+  <div class="alert alert-danger text-center"><%= flash[:error] %></div>
+  <% end %>
 
   <% if flash[:notice] %>
   <div class="alert alert-success text-center"><%= flash[:notice] %></div>
@@ -31,11 +43,13 @@
             |
             <%= link_to "FAQ", "/faq" %>
             |
-            <%= link_to "Tasks", "/tasks" %>
-            |
-            <%= link_to "Users", "/users" %>
-            |
-            <%= link_to "Projects", "/projects" %>
+            <% if current_user %>
+              <%= link_to "Tasks", "/tasks" %>
+              |
+              <%= link_to "Users", "/users" %>
+              |
+              <%= link_to "Projects", "/projects" %>
+            <% end %>
           </div>
           <div class="col-xs-6">
             <%= link_to image_tag("galvanize.png", :alt => "Galvanize", :class => "links"), "https://students.gschool.it/students/291" %>

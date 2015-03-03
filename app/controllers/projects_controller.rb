@@ -46,8 +46,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  private
+
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def ensure_current_user
+    unless current_user
+      redirect_to root_path, notice: 'You must sign in'
+    end
   end
 
 end
