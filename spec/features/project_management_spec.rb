@@ -1,32 +1,70 @@
 require "rails_helper"
 
-describe "the user using the projects" do
-  it "uses projects completely" do
-    visit root_path
+feature 'Existing user can create a Project' do
+  scenario 'visits root_path, signs in, and goes to Project index page' do
+    project = Project.new(name: 'Play the banjo')
+    project.save!
 
-    click_on "Projects"
-    
-    expect(page).to have_content "Projects"
+    sign_in_user
 
-    click_on "New Project"
+    click_link 'Projects'
+    expect(current_path).to eq projects_path
 
-    fill_in "Name", with: "test"
+    expect(page).to have_content 'Play the banjo'
 
-    click_on "Create Project"
+  end
 
-    expect(page).to have_content "test"
+  scenario 'can make a new Project' do
 
-    click_on "Edit"
+    sign_in_user
+    click_link 'Projects'
+    expect(current_path).to eq projects_path
+    click_link 'New Project'
 
-    fill_in "Name", with: "testing 1,2,3"
+    expect(current_path).to eq new_project_path
 
-    click_on "Update Project"
+    fill_in :project_name, with: 'Learn Ruby'
+    click_button 'Create Project'
 
-    expect(page).to have_content "testing 1,2,3"
+    expect(page).to have_content 'Project was successfully created'
+    expect(page).to have_content 'Learn Ruby'
 
-    click_on "Delete"
+  end
 
-    expect(page).to_not have_content "testing 1,2,3"
+  scenario 'edit an existing project' do
+    project = Project.new(name: 'Figure out the BAM')
+    project.save!
+    sign_in_user
 
+    click_link 'Projects'
+    expect(current_path).to eq projects_path
+    click_link 'Figure out the BAM'
+
+    click_link 'Edit'
+
+    expect(current_path).to eq edit_project_path(project)
+
+    fill_in :project_name, with: 'Learn Ruby'
+
+    click_button 'Update Project'
+
+    expect(current_path).to eq(project_path(project))
+  end
+
+  scenario 'delete an existing project' do
+    project = Project.new(name: 'Figure out the BAM')
+    project.save!
+    sign_in_user
+
+    click_link 'Projects'
+    expect(current_path).to eq projects_path
+    click_link 'Figure out the BAM'
+
+    expect(current_path).to eq project_path(project)
+    click_link 'Delete'
+
+    expect(current_path).to eq projects_path
+    expect(page).to have_content 'Project was successfully deleted'
+    expect { project.reload }.to raise_error ActiveRecord::RecordNotFound
   end
 end

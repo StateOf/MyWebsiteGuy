@@ -1,40 +1,68 @@
 require "rails_helper"
 
-describe "the user using the tasks" do
-  it "uses tasks complete" do
-    visit root_path
+feature 'Existing user can create a Task' do
+  scenario 'visits root_path, signs in, and goes to Task index page' do
+    task = Task.new(description: 'Play the banjo', due_date: '01/01/2011')
+    task.save!
 
-    click_on "Tasks"
+    sign_in_user
 
-    expect(page).to have_content "Tasks"
+    click_link 'Tasks'
+    expect(current_path).to eq tasks_path
 
-    click_on "New Task"
+    expect(page).to have_content 'Play the banjo'
 
-    fill_in "Description", with: "hike"
-    fill_in "Due date", with: "02/03/2015"
+  end
 
-    click_on "Create Task"
+  scenario 'can make a new Task' do
 
-    expect(page).to have_content "hike"
-    expect(page).to have_content "03/02/2015"
+    sign_in_user
+    click_link 'Tasks'
+    expect(current_path).to eq tasks_path
+    click_link 'New Task'
 
-    click_on "Edit"
+    expect(current_path).to eq new_task_path
 
-    fill_in "Description", with: "run"
-    fill_in "Due date", with: "02/02/1983"
-    check "Complete"
+    fill_in :task_description, with: 'Learn Ruby'
+    fill_in :task_due_date, with: '01/01/2011'
+    click_button 'Create Task'
 
-    click_on "Update Task"
+    expect(page).to have_content 'Task was successfully created'
+    expect(page).to have_content 'Learn Ruby'
 
-    expect(page).to have_content "run"
-    expect(page).to have_content "02/02/1983"
+  end
 
-    visit tasks_path
+  scenario 'edit an existing task' do
+    task = Task.new(description: 'Figure out the BAM')
+    task.save!
+    sign_in_user
 
-    click_on "Delete"
+    click_link 'Tasks'
+    expect(current_path).to eq tasks_path
+    click_link 'Figure out the BAM'
 
-    expect(page).to_not have_content "run"
-    expect(page).to_not have_content "02/02/1983"
+    click_link 'Edit'
 
+    expect(current_path).to eq edit_task_path(task)
+
+    fill_in :task_description, with: 'Learn Ruby'
+
+    click_button 'Update Task'
+
+    expect(current_path).to eq (task_path(task))
+  end
+
+  scenario 'delete an existing task' do
+    task = Task.new(description: 'Figure out the BAM', due_date: '01/01/2011')
+    task.save!
+    sign_in_user
+
+    click_link 'Tasks'
+    expect(current_path).to eq tasks_path
+    click_link 'Delete'
+
+    expect(current_path).to eq tasks_path
+    expect(page).to_not have_content 'Figure out the Bam'
+    expect { task.reload }.to raise_error ActiveRecord::RecordNotFound
   end
 end

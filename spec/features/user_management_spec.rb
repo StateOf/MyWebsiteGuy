@@ -1,40 +1,84 @@
 require "rails_helper"
 
-describe "the user using the users section" do
-  it "uses users completely" do
-    visit root_path
+feature 'Existing user can visit User index' do
+  scenario 'visits root_path, signs in, and goes to User index page' do
+    user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
+    user.save!
 
-    click_on "Users"
+    sign_in_user
 
-    expect(page).to have_content "Users"
+    click_link 'Users'
+    expect(current_path).to eq users_path
 
-    click_on "New User"
+    expect(page).to have_content 'Steve H'
 
-    fill_in "First name", with: "Steve"
-    fill_in "Last name", with: "Hirschhorn"
-    fill_in "Email", with: "test@test.com"
+  end
 
-    click_on "Create User"
+  scenario 'can make a new User' do
 
-    expect(page).to have_content "Steve Hirschhorn"
-    expect(page).to have_content "test@test.com"
+    sign_in_user
 
-    click_link "edit"
+    click_link 'Users'
+    expect(current_path).to eq users_path
+    click_link 'New User'
 
-    fill_in "First name", with: "Steve"
-    fill_in "Last name", with: "Hirschhorn"
-    fill_in "Email", with: "test1@test.com"
+    expect(current_path).to eq new_user_path
 
-    click_on "Update User"
+    fill_in :user_first_name, with: 'T'
+    fill_in :user_last_name, with: 'D'
+    fill_in :user_email, with: 'td@broncos.com'
+    fill_in :user_password, with: '1234'
+    fill_in :user_password_confirmation, with: '1234'
 
-    expect(page).to have_content "Steve Hirschhorn"
-    expect(page).to have_content "test1@test.com"
+    click_button 'Create User'
 
-    click_on "edit"
-    click_on "Delete user"
+    expect(page).to have_content 'User was successfully created'
+    expect(page).to have_content 'T D'
 
-    expect(page).to_not have_content "Steve Hirschhorn"
-    expect(page).to_not have_content "test1@test.com"
+  end
 
+  scenario 'edit an existing user' do
+    user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
+    user.save!
+    sign_in_user
+
+    click_link 'Users'
+    expect(current_path).to eq users_path
+    click_link 'Steve H'
+
+    click_link 'Edit'
+
+    expect(current_path).to eq edit_user_path(user)
+
+    fill_in :user_first_name, with: 'T'
+    fill_in :user_last_name, with: 'D'
+    fill_in :user_email, with: 'td@broncos.com'
+    fill_in :user_password, with: '1234'
+    fill_in :user_password_confirmation, with: '1234'
+
+    click_button 'Update User'
+
+    expect(current_path).to eq users_path
+    expect(page).to have_content 'User was successfully updated'
+  end
+
+  scenario 'delete an existing user' do
+    user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
+    user.save!
+    sign_in_user
+
+    click_link 'Users'
+    expect(current_path).to eq users_path
+
+    click_link 'Steve H'
+
+    click_link 'Edit'
+    expect(current_path).to eq edit_user_path(user)
+
+    click_link 'Delete'
+
+    expect(current_path).to eq users_path
+    expect(page).to have_content 'User was successfully deleted'
+    expect { user.reload }.to raise_error ActiveRecord::RecordNotFound
   end
 end
