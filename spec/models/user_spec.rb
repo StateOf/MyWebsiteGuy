@@ -19,4 +19,16 @@ describe User do
     expect(user.errors[:email]).to include("can't be blank")
   end
 
+  it "is invalid without a password" do
+    user = User.new(password: nil)
+    user.valid?
+    expect(user.errors[:password]).to include("can't be blank")
+  end
+
+  it "is invalid without matching password and password confirmation" do
+    user = User.new(password: '1234', password_confirmation: '123')
+    user.valid?
+    expect(user.errors[:password_confirmation]).to include("doesn't match Password")
+  end
+
 end
