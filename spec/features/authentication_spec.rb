@@ -20,6 +20,20 @@ feature 'Sign in as an existing user' do
     expect(page).to have_content 'Your life, organized'
 
     user.destroy!
+  end
 
+  scenario 'guest sees validation message when trying to sign in' do
+
+    visit root_path
+
+    click_link 'Sign In'
+
+    expect(current_path).to eq '/sign-in'
+    expect(page).to have_content 'Sign into gCamp'
+
+    click_button 'Sign In'
+
+    expect(current_path).to eq '/sign-in'
+    expect(page).to have_content 'Email / Password combination is invalid'
   end
 end

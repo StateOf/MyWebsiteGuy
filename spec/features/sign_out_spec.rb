@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Sign out as an existing user from root_path' do
+feature 'Sign out as an existing user from root_path and redirected to root_path' do
   scenario 'can sign out' do
     user = user = User.new(first_name: 'T', last_name: 'H', email: 'theron@gmail', password: "1234")
     user.save!
