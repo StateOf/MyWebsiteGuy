@@ -56,5 +56,5 @@ def sign_in_user
   click_link 'Sign In'
   fill_in :email, with: user.email
   fill_in :password, with: '1234'
-  click_button 'Sign Up'
+  click_button 'Sign In'
 end
