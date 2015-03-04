@@ -14,7 +14,7 @@ feature 'Existing user can CRUD a Task' do
 
   end
 
-  scenario 'can make a new Task and see a success message' do
+  scenario 'can create a new Task and see a success message' do
 
     sign_in_user
     click_link 'Tasks'
@@ -29,17 +29,31 @@ feature 'Existing user can CRUD a Task' do
 
     expect(page).to have_content 'Task was successfully created'
     expect(page).to have_content 'Learn Ruby'
-
   end
 
-  scenario 'edit an existing task' do
+  scenario 'can read an existing Task' do
+    task = Task.new(description: 'Do more homework')
+    task.save!
+    sign_in_user
+
+    click_link 'Tasks'
+
+    expect(current_path).to eq tasks_path
+
+    click_link 'Do more homework'
+
+    expect(current_path).to eq task_path(task)
+    expect(page).to have_content 'Do more homework'
+    expect(page).to have_link 'Edit'
+  end
+
+  scenario 'can update an existing task and see a success message' do
     task = Task.new(description: 'Figure out the BAM')
     task.save!
     sign_in_user
 
     click_link 'Tasks'
     expect(current_path).to eq tasks_path
-    click_link 'Figure out the BAM'
 
     click_link 'Edit'
 
@@ -50,6 +64,7 @@ feature 'Existing user can CRUD a Task' do
     click_button 'Update Task'
 
     expect(current_path).to eq (task_path(task))
+    expect(page).to have_content 'Task was successfully updated'
   end
 
   scenario 'delete an existing task' do

@@ -14,7 +14,7 @@ feature 'Existing user can CRUD a Project' do
 
   end
 
-  scenario 'can make a new Project and see success message' do
+  scenario 'can create a new Project and see success message' do
 
     sign_in_user
     click_link 'Projects'
@@ -31,9 +31,24 @@ feature 'Existing user can CRUD a Project' do
 
   end
 
-  scenario 'edit an existing project' do
+  scenario 'can read an existing Project' do
+    project = Project.new(name: 'Start building apps')
+    project.save!
+
+    sign_in_user
+    click_link 'Projects'
+    expect(current_path).to eq projects_path
+
+    click_link 'Start building apps'
+    expect(current_path).to eq project_path(project)
+    expect(page).to have_content 'Start building apps'
+    expect(page).to have_link 'Edit'
+  end
+
+  scenario 'can update an existing project with success message' do
     project = Project.new(name: 'Figure out the BAM')
     project.save!
+
     sign_in_user
 
     click_link 'Projects'
@@ -49,9 +64,10 @@ feature 'Existing user can CRUD a Project' do
     click_button 'Update Project'
 
     expect(current_path).to eq(project_path(project))
+    expect(page).to have_content 'Project was successfully updated'
   end
 
-  scenario 'delete an existing project' do
+  scenario 'delete an existing project with success message' do
     project = Project.new(name: 'Figure out the BAM')
     project.save!
     sign_in_user

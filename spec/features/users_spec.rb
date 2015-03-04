@@ -14,7 +14,7 @@ feature 'Existing user can CRUD a User' do
 
   end
 
-  scenario 'can make a new User and see success message' do
+  scenario 'can create a new User and see success message' do
 
     sign_in_user
 
@@ -37,7 +37,24 @@ feature 'Existing user can CRUD a User' do
 
   end
 
-  scenario 'edit an existing user' do
+  scenario 'can read an existing User' do
+    user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
+    user.save!
+    sign_in_user
+
+    click_link 'Users'
+
+    expect(current_path).to eq users_path
+
+    click_link 'Steve H'
+
+    expect(current_path).to eq user_path(user)
+    expect(page).to have_content 'Steve H'
+    expect(page).to have_content 'First Name'
+    expect(page).to have_content 'Last Name'
+  end
+
+  scenario 'edit an existing user with success message' do
     user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
     user.save!
     sign_in_user
@@ -62,7 +79,7 @@ feature 'Existing user can CRUD a User' do
     expect(page).to have_content 'User was successfully updated'
   end
 
-  scenario 'delete an existing user' do
+  scenario 'delete an existing user with success message' do
     user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
     user.save!
     sign_in_user
