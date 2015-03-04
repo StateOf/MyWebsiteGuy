@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature 'Existing user can visit User index' do
+feature 'Existing user can CRUD a User' do
   scenario 'visits root_path, signs in, and goes to User index page' do
     user = User.new(first_name: 'Steve', last_name: 'H', email:'test@ymail.com', password:'123', password_confirmation: '123')
     user.save!
@@ -14,7 +14,7 @@ feature 'Existing user can visit User index' do
 
   end
 
-  scenario 'can make a new User' do
+  scenario 'can make a new User and see success message' do
 
     sign_in_user
 
@@ -81,4 +81,24 @@ feature 'Existing user can visit User index' do
     expect(page).to have_content 'User was successfully deleted'
     expect { user.reload }.to raise_error ActiveRecord::RecordNotFound
   end
+
+  scenario 'can see validations without a first name, last name, and email' do
+
+    sign_in_user
+    click_link 'Users'
+    expect(current_path).to eq users_path
+    click_link 'New User'
+
+    expect(current_path).to eq new_user_path
+
+    fill_in :user_password, with: '123'
+    fill_in :user_password_confirmation, with: '123'
+    click_button 'Create User'
+
+    expect(page).to have_content '3 errors prohibited this form from being saved:
+                                  First name can\'t be blank
+                                  Last name can\'t be blank
+                                  Email can\'t be blank'
+  end
+
 end

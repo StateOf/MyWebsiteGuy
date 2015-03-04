@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature 'Existing user can create a Task' do
+feature 'Existing user can CRUD a Task' do
   scenario 'visits root_path, signs in, and goes to Task index page' do
     task = Task.new(description: 'Play the banjo', due_date: '01/01/2011')
     task.save!
@@ -14,7 +14,7 @@ feature 'Existing user can create a Task' do
 
   end
 
-  scenario 'can make a new Task' do
+  scenario 'can make a new Task and see a success message' do
 
     sign_in_user
     click_link 'Tasks'
@@ -65,4 +65,20 @@ feature 'Existing user can create a Task' do
     expect(page).to_not have_content 'Figure out the Bam'
     expect { task.reload }.to raise_error ActiveRecord::RecordNotFound
   end
+
+  scenario 'can see validations without a description' do
+
+    sign_in_user
+    click_link 'Tasks'
+    expect(current_path).to eq tasks_path
+    click_link 'New Task'
+
+    expect(current_path).to eq new_task_path
+
+    click_button 'Create Task'
+
+    expect(page).to have_content '1 error prohibited this form from being saved:
+                                  Description can\'t be blank'
+  end
+
 end

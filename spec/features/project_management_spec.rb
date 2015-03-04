@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature 'Existing user can create a Project' do
+feature 'Existing user can CRUD a Project' do
   scenario 'visits root_path, signs in, and goes to Project index page' do
     project = Project.new(name: 'Play the banjo')
     project.save!
@@ -14,7 +14,7 @@ feature 'Existing user can create a Project' do
 
   end
 
-  scenario 'can make a new Project' do
+  scenario 'can make a new Project and see success message' do
 
     sign_in_user
     click_link 'Projects'
@@ -67,4 +67,20 @@ feature 'Existing user can create a Project' do
     expect(page).to have_content 'Project was successfully deleted'
     expect { project.reload }.to raise_error ActiveRecord::RecordNotFound
   end
+
+  scenario 'can see validations without a name' do
+
+    sign_in_user
+    click_link 'Projects'
+    expect(current_path).to eq projects_path
+    click_link 'New Project'
+
+    expect(current_path).to eq new_project_path
+
+    click_button 'Create Project'
+
+    expect(page).to have_content '1 error prohibited this form from being saved:
+                                  Name can\'t be blank'
+  end
+
 end
