@@ -1,9 +1,10 @@
 
 
-<div class="well col-md-8 col-md-offset-2">
+<div class="well col-md-6 col-md-offset-3">
     <div class="page-header">
       <h2>Sign up for gCamp!</h2>
     </div>
+    
     <%= form_for @user, url: signup_path do |f| %>
 
     <% if @user.errors.present? %>
