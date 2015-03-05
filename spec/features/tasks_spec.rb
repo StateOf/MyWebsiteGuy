@@ -7,8 +7,7 @@ feature 'Existing user can CRUD a Task' do
 
     sign_in_user
 
-    click_link 'Tasks'
-    expect(current_path).to eq tasks_path
+    visit project_tasks_path
 
     expect(page).to have_content 'Play the banjo'
 
@@ -17,8 +16,9 @@ feature 'Existing user can CRUD a Task' do
   scenario 'can create a new Task and see a success message' do
 
     sign_in_user
-    click_link 'Tasks'
-    expect(current_path).to eq tasks_path
+
+    visit project_tasks_path
+
     click_link 'New Task'
 
     expect(current_path).to eq new_task_path
@@ -34,11 +34,10 @@ feature 'Existing user can CRUD a Task' do
   scenario 'can read an existing Task' do
     task = Task.new(description: 'Do more homework')
     task.save!
+
     sign_in_user
 
-    click_link 'Tasks'
-
-    expect(current_path).to eq tasks_path
+    visit project_tasks_path
 
     click_link 'Do more homework'
 
@@ -50,10 +49,10 @@ feature 'Existing user can CRUD a Task' do
   scenario 'can update an existing task and see a success message' do
     task = Task.new(description: 'Figure out the BAM')
     task.save!
+
     sign_in_user
 
-    click_link 'Tasks'
-    expect(current_path).to eq tasks_path
+    visit project_tasks_path
 
     click_link 'Edit'
 
@@ -72,11 +71,11 @@ feature 'Existing user can CRUD a Task' do
     task.save!
     sign_in_user
 
-    click_link 'Tasks'
-    expect(current_path).to eq tasks_path
+    visit project_tasks_path
+
     click_link 'Delete'
 
-    expect(current_path).to eq tasks_path
+    expect(current_path).to eq project_tasks_path
     expect(page).to_not have_content 'Figure out the Bam'
     expect { task.reload }.to raise_error ActiveRecord::RecordNotFound
   end
@@ -84,8 +83,9 @@ feature 'Existing user can CRUD a Task' do
   scenario 'can see validations without a description' do
 
     sign_in_user
-    click_link 'Tasks'
-    expect(current_path).to eq tasks_path
+
+    visit project_tasks_path
+
     click_link 'New Task'
 
     expect(current_path).to eq new_task_path
