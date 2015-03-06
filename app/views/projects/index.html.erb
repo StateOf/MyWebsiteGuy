@@ -23,7 +23,8 @@
         <%= link_to project.name, project %>
       </td>
       <td class="col-md-3">
-        
+        <%= link_to project.tasks.count, project_tasks_path(project) %>
+      </td>
     </tr>
     <% end %>
   </tbody>

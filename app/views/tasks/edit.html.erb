@@ -3,8 +3,10 @@
 </div>
 
 <ol class="breadcrumb">
-  <li><%= link_to 'Tasks', tasks_path(@tasks) %></li>
-  <li><%= link_to @task.description, task_path(@task) %></li>
+  <li><%= link_to 'Projects', projects_path(@projects) %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li><%= link_to 'Tasks', project_tasks_path(@project, @tasks) %></li>
+  <li><%= link_to @task.description, project_task_path(@project, @task) %></li>
   <li class="active">Edit</li>
 </ol>
 

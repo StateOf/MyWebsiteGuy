@@ -7,3 +7,21 @@ def sign_in_user
   fill_in :password, with: '1234'
   click_button 'Sign In'
 end
+
+
+
+def create_project(options= {})
+  Project.create!({
+    name: 'Test Project',
+  }.merge(options))
+end
+
+def create_task (project, options = {})
+  Task.create!({
+   description: 'Test task for a project',
+   :project_id => project.id,
+   complete: true,
+ }.merge(options))
+
+
+end
