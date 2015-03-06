@@ -5,7 +5,7 @@ feature 'Existing user can CRUD a Project' do
     project = Project.new(name: 'Play the banjo')
     project.save!
 
-    sign_in_user
+    login
 
     click_link 'Projects'
     expect(current_path).to eq projects_path
@@ -16,7 +16,8 @@ feature 'Existing user can CRUD a Project' do
 
   scenario 'can create a new Project and see success message' do
 
-    sign_in_user
+    login
+    
     click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'New Project'
@@ -35,7 +36,7 @@ feature 'Existing user can CRUD a Project' do
     project = Project.new(name: 'Start building apps')
     project.save!
 
-    sign_in_user
+    login
     click_link 'Projects'
     expect(current_path).to eq projects_path
 
@@ -49,7 +50,7 @@ feature 'Existing user can CRUD a Project' do
     project = Project.new(name: 'Figure out the BAM')
     project.save!
 
-    sign_in_user
+    login
 
     click_link 'Projects'
     expect(current_path).to eq projects_path
@@ -70,7 +71,8 @@ feature 'Existing user can CRUD a Project' do
   scenario 'delete an existing project with success message' do
     project = Project.new(name: 'Figure out the BAM')
     project.save!
-    sign_in_user
+
+    login
 
     click_link 'Projects'
     expect(current_path).to eq projects_path
@@ -86,7 +88,7 @@ feature 'Existing user can CRUD a Project' do
 
   scenario 'can see validations without a name' do
 
-    sign_in_user
+    login
     click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'New Project'

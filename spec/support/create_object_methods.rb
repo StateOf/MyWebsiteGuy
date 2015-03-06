@@ -1,14 +1,11 @@
-def sign_in_user
-  user = User.new(first_name: 'theron', last_name: 'H', email: 'theron@gmail', password: "1234")
-  user.save!
-  visit root_path
-  click_link 'Sign In'
-  fill_in :email, with: user.email
-  fill_in :password, with: '1234'
-  click_button 'Sign In'
+  def create_user(options= {})
+  User.create!({
+    first_name: 'Steve',
+    last_name: 'H',
+    email: 'testingtesting@gmail.com',
+    password: 'password',
+  }.merge(options))
 end
-
-
 
 def create_project(options= {})
   Project.create!({
@@ -22,6 +19,4 @@ def create_task (project, options = {})
    :project_id => project.id,
    complete: true,
  }.merge(options))
-
-
 end

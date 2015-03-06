@@ -3,7 +3,7 @@ require "rails_helper"
 feature 'Existing user can CRUD a Task' do
   scenario 'signs in, goes to project index page, and clicks through to task showpage' do
 
-    sign_in_user
+    login
 
     project = create_project
 
@@ -17,7 +17,7 @@ feature 'Existing user can CRUD a Task' do
 
     project = create_project
 
-    sign_in_user
+    login
 
     visit project_tasks_path(project)
 
@@ -38,7 +38,7 @@ feature 'Existing user can CRUD a Task' do
     project = create_project
     task = create_task(project)
 
-    sign_in_user
+    login
 
     visit project_tasks_path(project)
 
@@ -53,7 +53,7 @@ feature 'Existing user can CRUD a Task' do
     project = create_project
     task = create_task(project)
 
-    sign_in_user
+    login
 
     visit project_tasks_path(project)
 
@@ -73,7 +73,7 @@ feature 'Existing user can CRUD a Task' do
     project = create_project
     task = create_task(project)
 
-    sign_in_user
+    login
 
     visit project_tasks_path(project)
 
@@ -88,7 +88,7 @@ feature 'Existing user can CRUD a Task' do
 
     project = create_project
 
-    sign_in_user
+    login
 
     visit project_tasks_path(project)
 
