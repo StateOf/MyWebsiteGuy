@@ -5,8 +5,6 @@ feature 'Existing user can CRUD a User' do
     User.destroy_all
   end
 
-  let(:user) { user_create }
-
   scenario 'visits root_path, signs in, and goes to User index page' do
 
     login
@@ -110,9 +108,9 @@ feature 'Existing user can CRUD a User' do
 
     click_link 'Delete'
 
-    expect(current_path).to eq "/users"
+    expect(current_path).to eq users_path
 
-    expect(page).to have_content 'User was successfully deleted' 
+    expect(page).to have_content 'User was successfully deleted'
   end
 
   scenario 'can see validations without a first name, last name, and email' do
