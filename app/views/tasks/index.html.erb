@@ -22,14 +22,14 @@
   <tbody>
     <% @tasks.each do |task| %>
     <tr>
-      <td class="col-md-1">
+      <td class="col-md-2">
           <% if task.complete %>
             <s><%= link_to task.description, project_task_path(@project, task) %></s>
           <% else %>
             <%= link_to task.description, project_task_path(@project, task) %>
           <% end %>
       </td>
-      <td class="col-md-1">
+      <td class="col-md-2">
         <%= task.due_date.try(:strftime ,"%m/%d/%Y") %>
       </td>
       <td class="col-md-2 text-right">
