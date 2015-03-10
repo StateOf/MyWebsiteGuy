@@ -17,7 +17,7 @@ feature 'Existing user can CRUD a Project' do
   scenario 'can create a new Project and see success message' do
 
     login
-    
+
     click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'New Project'
