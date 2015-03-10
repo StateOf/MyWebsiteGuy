@@ -6,6 +6,6 @@ class Membership < ActiveRecord::Base
   belongs_to :project
 
   validates :user, presence: true
-  validates :user, uniqueness: {scope: :user_id, message: " has already been added to this project"}
+  validates_uniqueness_of :user, scope: :project, message: " has already been added to this project"
 
 end
