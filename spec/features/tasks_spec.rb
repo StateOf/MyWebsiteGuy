@@ -77,7 +77,8 @@ feature 'Existing user can CRUD a Task' do
 
     visit project_tasks_path(project)
 
-    click_link 'Delete'
+    # Link to delete doesn't have text, so select using the glyphicon class we added
+    find('.glyphicon-remove').click
 
     expect(current_path).to eq project_tasks_path(project)
     expect(page).to_not have_content 'Test task for a project'

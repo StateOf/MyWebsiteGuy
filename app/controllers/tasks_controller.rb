@@ -9,7 +9,9 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = @project.tasks.find(params[:id])
+    @task = Task.find(params[:id])
+    @comments = @task.comments.all
+    @comment = @task.comments.new
   end
 
   def new

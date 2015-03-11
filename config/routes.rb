@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :tasks do
+    resources :comments
+  end
+
   resources :projects do
     resources :tasks
     resources :memberships
