@@ -31,4 +31,13 @@ describe User do
     expect(user.errors[:password_confirmation]).to include("doesn't match Password")
   end
 
+  it "replaces use_id in comments table with nil when destroy is called on a user" do
+    user = User.create!(first_name: 'steve', last_name: 'h', email: 'test@gmail.com', password: '123', password_confirmation: '123')
+    comment = Comment.create!(user_id: user.id, task_id: 1, message:'test')
+    user.destroy
+    expect(comment.reload.user_id).to eq(nil)
+    expect(comment.reload.message).to eq(comment.message)
+    expect(comment.reload.task_id).to eq(comment.task_id)
+  end
+
 end
