@@ -27,6 +27,7 @@
             <s><%= link_to task.description, project_task_path(@project, task) %></s>
           <% else %>
             <%= link_to task.description, project_task_path(@project, task) %>
+            <span class="badge"><%= task.comments.count %></span>
           <% end %>
       </td>
       <td class="col-md-2">

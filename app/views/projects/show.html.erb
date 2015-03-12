@@ -14,8 +14,14 @@
 </ol>
 
 <div>
-  <%= link_to pluralize(@project.tasks.count, "Task"), project_tasks_path(@project) %>
+  <p><%= link_to pluralize(@project.tasks.count, "Task"), project_tasks_path(@project) %></p>
 </div>
 <div>
-  <%= link_to pluralize(@project.memberships.count, "Membership"), project_memberships_path(@project) %>
+  <p><%= link_to pluralize(@project.memberships.count, "Membership"), project_memberships_path(@project) %></p>
+</div>
+
+<div class="well">
+  <h3>Delete Project</h3>
+  <p>Deleting this project will also delete <%= pluralize(@project.memberships.count, "membership") %> and <%= pluralize(@project.tasks.count, "task") %> and associated comments.</p>
+  <%= link_to "Delete", @projects_path, method: :delete, data: {cofirm: "Are you sure?"}, class:"btn btn-danger" %>
 </div>

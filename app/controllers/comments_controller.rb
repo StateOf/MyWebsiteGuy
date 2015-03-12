@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to project_task_path(@task.project_id, @task)
     else
-      render :new
+      redirect_to project_task_path(@task.project_id, @task)
     end
   end
 

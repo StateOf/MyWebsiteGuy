@@ -33,18 +33,30 @@
 </h3>
 
 
-<% @task.comments.each do |comment| %>
-<% if comment.id %>
-<div class="row">
-<div class="col-md-3">
-<%= link_to "#{comment.user.full_name}", user_path %>
-<p class="text-muted"><%= time_ago_in_words(comment.created_at) + " ago" %></p>
-</div>
-<div class="col-md-9">
-<%= comment.message %>
-</div>
-</div>
-<% end %>
+<% @comments.each do |comment| %>
+  <% if comment.user_id %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= link_to "#{comment.user.full_name}", user_path %>
+        <p class="text-muted"><%= time_ago_in_words(comment.created_at) + " ago" %></p>
+      </div>
+      <div class="col-md-9">
+        <%= comment.message %>
+      </div>
+    </div>
+    </br>
+  <% else %>
+    <div class="row">
+      <div class="col-md-3">
+        <%= "(deleted user)" %>
+        <p class="text-muted"><%= time_ago_in_words(comment.created_at) + " ago" %></p>
+      </div>
+      <div class="col-md-9">
+        <%= comment.message %>
+      </div>
+    </div>
+    </br>
+  <% end %>
 <% end %>
 
 <div class="row">

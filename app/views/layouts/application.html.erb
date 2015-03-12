@@ -27,11 +27,11 @@
   <div class="container">
 
   <% if flash[:error] %>
-  <div class="alert alert-danger text-left"><%= flash[:error] %></div>
+    <div class="alert alert-danger text-left"><%= flash[:error] %></div>
   <% end %>
 
   <% if flash[:message] %>
-  <div class="alert alert-success text-left"><%= flash[:message] %></div>
+    <div class="alert alert-success text-left"><%= flash[:message] %></div>
   <% end %>
 
 <%= yield  %>
