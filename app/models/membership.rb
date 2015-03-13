@@ -1,6 +1,6 @@
 class Membership < ActiveRecord::Base
 
-  ROLE = ["Member", "User"]
+  ROLE = ["Member", "Owner"]
 
   belongs_to :user
   belongs_to :project
