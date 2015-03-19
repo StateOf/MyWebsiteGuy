@@ -1,9 +1,6 @@
 require "rails_helper"
 
 feature 'Existing user can CRUD a User' do
-  before do
-    User.destroy_all
-  end
 
   scenario 'visits root_path, signs in, and goes to User index page' do
 
