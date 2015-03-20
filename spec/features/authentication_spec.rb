@@ -15,9 +15,8 @@ feature 'Sign in as an existing user' do
     fill_in :password, with: '1234'
     click_button 'Sign In'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq projects_path
     expect(page).to have_content 'You have successfully signed in'
-    expect(page).to have_content 'Your life, organized'
 
     user.destroy!
   end

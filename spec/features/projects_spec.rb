@@ -7,7 +7,6 @@ feature 'Existing user can CRUD a Project' do
 
     login
 
-    click_link 'Projects'
     expect(current_path).to eq projects_path
 
     expect(page).to have_content 'Play the banjo'
@@ -18,7 +17,6 @@ feature 'Existing user can CRUD a Project' do
 
     login
 
-    click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'New Project'
 
@@ -37,7 +35,6 @@ feature 'Existing user can CRUD a Project' do
     project.save!
 
     login
-    click_link 'Projects'
     expect(current_path).to eq projects_path
 
     click_link 'Start building apps'
@@ -52,7 +49,6 @@ feature 'Existing user can CRUD a Project' do
 
     login
 
-    click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'Figure out the BAM'
 
@@ -74,7 +70,6 @@ feature 'Existing user can CRUD a Project' do
 
     login
 
-    click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'Figure out the BAM'
 
@@ -89,7 +84,6 @@ feature 'Existing user can CRUD a Project' do
   scenario 'can see validations without a name' do
 
     login
-    click_link 'Projects'
     expect(current_path).to eq projects_path
     click_link 'New Project'
 

@@ -15,9 +15,8 @@ feature 'Sign out as an existing user from root_path and redirected to root_path
     fill_in :password, with: '1234'
     click_button 'Sign In'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq projects_path
     expect(page).to have_content 'You have successfully signed in'
-    expect(page).to have_content 'Your life, organized'
 
     click_link 'Sign Out'
 
@@ -39,9 +38,8 @@ feature 'Sign out as an existing user from root_path and redirected to root_path
     fill_in :password, with: '1234'
     click_button 'Sign In'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq projects_path
     expect(page).to have_content 'You have successfully signed in'
-    expect(page).to have_content 'Your life, organized'
 
     click_link 'Projects'
 
