@@ -10,17 +10,21 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div>
-      <%= link_to "gCamp", "/", class:"navbar-brand" %>
+        <% if current_user %>
+          <%= link_to "gCamp", projects_path, class:"navbar-brand" %>
+        <% else %>
+          <%= link_to "gCamp", "/", class:"navbar-brand" %>
+        <% end %>
       </div>
       <ul class="nav navbar-nav navbar-right">
-      <% if current_user %>
-      <%= link_to "Sign Out", signout_path, class:"navbar-text pull-right" %>
-      <%= link_to current_user.full_name, user_path(current_user), class:"navbar-text pull-right" %>
-      <% else %>
-      <%= link_to "Sign In", sign_in_path, class:"navbar-text pull-right" %>
-      <%= link_to "Sign Up", sign_up_path, class:"navbar-text pull-right" %>
-      <% end %>
-    </ul>
+        <% if current_user %>
+          <%= link_to "Sign Out", signout_path, class:"navbar-text pull-right" %>
+          <%= link_to current_user.full_name, user_path(current_user), class:"navbar-text pull-right" %>
+        <% else %>
+          <%= link_to "Sign In", sign_in_path, class:"navbar-text pull-right" %>
+          <%= link_to "Sign Up", sign_up_path, class:"navbar-text pull-right" %>
+        <% end %>
+      </ul>
     </div>
   </nav>
 
@@ -37,28 +41,28 @@
 <%= yield  %>
 </div>
   <footer class="container">
-      <div class="page-header"></div>
-        <div class="row">
-          <div class="col-xs-6">
-            <%= link_to "About", "/about" %>
+    <div class="page-header"></div>
+    <div class="row">
+      <div class="col-xs-6">
+        <%= link_to "About", "/about" %>
+        |
+        <%= link_to "Terms", "/terms" %>
+        |
+        <%= link_to "FAQ", "/faq" %>
+          <% if current_user %>
             |
-            <%= link_to "Terms", "/terms" %>
+            <%= link_to "Users", "/users" %>
             |
-            <%= link_to "FAQ", "/faq" %>
-              <% if current_user %>
-                |
-                <%= link_to "Users", "/users" %>
-                |
-                <%= link_to "Projects", "/projects" %>
-              <% end %>
-          </div>
-          <div class="col-xs-6">
-            <%= link_to image_tag("galvanize.png", :alt => "Galvanize", :class => "links"), "https://students.gschool.it/students/291" %>
-            <%= link_to image_tag("github.png", :alt => "GitHub", :class => "links"), "https://github.com/steve970" %>
-            <%= link_to image_tag("twitter.png", :alt => "Twitter", :class => "links"), "http://www.twitter.com/originalgilbert" %>
-            <%= link_to image_tag("linked_in.jpg", :alt => "LinkedIn", :class => "links"), "http://www.linkedin.com/in/stevenhirschhorn" %>
-          </div>
-        </div>
+            <%= link_to "Projects", "/projects" %>
+          <% end %>
+      </div>
+      <div class="col-xs-6">
+        <%= link_to image_tag("galvanize.png", :alt => "Galvanize", :class => "links"), "https://students.gschool.it/students/291" %>
+        <%= link_to image_tag("github.png", :alt => "GitHub", :class => "links"), "https://github.com/steve970" %>
+        <%= link_to image_tag("twitter.png", :alt => "Twitter", :class => "links"), "http://www.twitter.com/originalgilbert" %>
+        <%= link_to image_tag("linked_in.jpg", :alt => "LinkedIn", :class => "links"), "http://www.linkedin.com/in/stevenhirschhorn" %>
+      </div>
+    </div>
   </footer>
 
 </body>

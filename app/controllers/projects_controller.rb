@@ -1,4 +1,6 @@
-class ProjectsController < ApplicationController
+class ProjectsController < PrivateController
+
+  before_action :ensure_current_user
 
   def index
     @projects = Project.all
@@ -15,8 +17,9 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
+      @project.memberships.create(user: current_user, role: 'Owner')
       flash[:message] = "Project was successfully created"
-      redirect_to @project
+      redirect_to project_tasks_path(@project)
     else
       render :new
     end
