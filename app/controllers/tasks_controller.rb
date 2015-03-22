@@ -1,8 +1,10 @@
-class TasksController < ApplicationController
+class TasksController < PrivateController
 
   before_action do
     @project = Project.find(params[:project_id])
   end
+
+  before_action :ensure_project_member
 
   def index
     @tasks = @project.tasks

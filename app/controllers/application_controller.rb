@@ -20,4 +20,30 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_project_member
+    if !current_user.member?(@project)
+      flash[:error] = "You do not have access to that project"
+      redirect_to projects_path
+    end
+  end
+
+  def ensure_project_owner
+    if !current_user.owner?(@project)
+      flash[:error] = "You do not have access"
+      redirect_to project_path(@project)
+    end
+  end
+
+  def current_user_or_admin(user)
+    user == current_user
+  end
+
+  def current_user_404
+    if !current_user_or_admin(@user)
+      render file: 'public/404.html', status: :not_found, layout: false
+    end
+  end
+
+
+
 end

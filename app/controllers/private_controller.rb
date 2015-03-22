@@ -1,7 +1,3 @@
 class PrivateController < ApplicationController
 
-
-
-
-
 end
