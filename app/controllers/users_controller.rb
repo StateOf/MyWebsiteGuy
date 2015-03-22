@@ -3,8 +3,6 @@ class UsersController < PrivateController
   before_action :current_user_404, only: [:edit, :udpate, :destroy]
   before_action :ensure_current_user
 
-
-
   def index
     @users = User.all
   end
@@ -51,7 +49,11 @@ class UsersController < PrivateController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    if current_user.admin
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
+    else
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
   end
 
 end
