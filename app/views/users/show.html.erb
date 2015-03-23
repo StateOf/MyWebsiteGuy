@@ -1,5 +1,5 @@
 <div class="page-header">
-  <% if current_user.id == @user.id %>
+  <% if current_user.id == @user.id || current_user.admin %>
     <div class="pull-right">
       <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-info" %>
     </div>
@@ -21,7 +21,7 @@
   <dd>
     <%= @user.last_name %>
   </dd>
-  <% if current_user.id == @user.id %>
+  <% if current_user.admin || current_user.project_member_of(@user) %>
   <dt>
     Email
   </dt>

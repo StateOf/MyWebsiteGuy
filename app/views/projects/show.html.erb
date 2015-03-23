@@ -1,5 +1,5 @@
 <div class= "page-header">
-  <% if current_user.owner?(@project) %>
+  <% if current_user.owner_admin?(@project) %>
   <div class="pull-right">
     <%= link_to 'Edit', edit_project_path(@project), class:"btn btn-info" %>
   </div>
@@ -21,7 +21,7 @@
   <p><%= link_to pluralize(@project.memberships.count, "Membership"), project_memberships_path(@project) %></p>
 </div>
 
-<% if current_user.owner?(@project) %>
+<% if current_user.owner_admin?(@project) %>
   <div class="well">
       <h3>Delete Project</h3>
       <p>Deleting this project will also delete <%= pluralize(@project.memberships.count, "membership") %>, <%= pluralize(@project.tasks.count, "task") %> and associated comments.</p>

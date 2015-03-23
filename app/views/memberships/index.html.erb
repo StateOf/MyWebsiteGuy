@@ -10,7 +10,7 @@
   <li class="active">Memberships</li>
 </ol>
 
-<% if current_user.owner?(@project) %>
+<% if current_user.owner_admin?(@project) %>
   <div class="row">
     <% if @membership.errors.any? %>
       <div class="form-group">
@@ -50,13 +50,13 @@
             <% if membership.id %>
               <%= form_for [@project, membership], html: {class: "form-inline"} do |f| %>
                 <td><%= link_to "#{membership.user.full_name}", user_path(membership.user) %></td>
-                <% if current_user.owner?(@project) %>
+                <% if current_user.owner_admin?(@project) %>
                   <td><%= f.collection_select(:role, Membership::ROLE, :to_s, :to_s, {},{class: 'form-control'}) %></td>
                   <td><%= f.submit 'Update', class: 'btn btn-primary' %></td>
                 <% else %>
                   <td><%= membership.role.downcase %></td>
                 <% end %>
-                <% if current_user.owner?(@project) || current_user.id == membership.user_id %>
+                <% if current_user.owner_admin?(@project) || current_user.id == membership.user_id %>
                   <% if @project.memberships.where(role:"Owner").count == 1 && membership.role == 'Owner' %>
                     <td>You are the last owner</td>
                   <% else %>

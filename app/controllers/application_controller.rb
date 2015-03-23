@@ -17,19 +17,20 @@ class ApplicationController < ActionController::Base
   def ensure_current_user
     unless current_user
       flash[:error] = 'You must sign in'
+      session[:return_to] ||= request.fullpath
       redirect_to sign_in_path
     end
   end
 
   def ensure_project_member
-    if !current_user.member?(@project)
+    if !current_user.member_admin?(@project)
       flash[:error] = "You do not have access to that project"
       redirect_to projects_path
     end
   end
 
   def ensure_project_owner
-    if !current_user.owner?(@project)
+    if !current_user.owner_admin?(@project)
       flash[:error] = "You do not have access"
       redirect_to project_path(@project)
     end
@@ -45,6 +46,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def user_and_members
+    current_user.project_member?(@project)
+  end
 
 end

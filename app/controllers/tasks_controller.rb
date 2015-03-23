@@ -4,7 +4,7 @@ class TasksController < PrivateController
     @project = Project.find(params[:project_id])
   end
 
-  before_action :ensure_project_member
+  before_action :task_belongs_to_project, only:[:destroy]
 
   def index
     @tasks = @project.tasks
@@ -54,6 +54,13 @@ class TasksController < PrivateController
 
   def task_params
     params.require(:task).permit(:description, :complete, :due_date, :project_id)
+  end
+
+  def task_belongs_to_project
+    if !@project.tasks.include?(@task)
+      flash[:error] = "You do not have access to that project"
+      redirect_to projects_path
+    end
   end
 
 end

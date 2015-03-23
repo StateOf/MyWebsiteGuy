@@ -1,7 +1,7 @@
 class UsersController < PrivateController
 
-  before_action :current_user_404, only: [:edit, :udpate, :destroy]
   before_action :ensure_current_user
+  before_action :current_user_404, only: [:edit, :udpate, :destroy]
 
   def index
     @users = User.all

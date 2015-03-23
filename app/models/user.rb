@@ -13,12 +13,16 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def member?(project)
-    self.memberships.find_by(project_id: project.id) != nil
+  def member_admin?(project)
+    self.admin || self.memberships.find_by(project_id: project.id) != nil
   end
 
   def owner_admin?(project)
-    self.admin || self.memberships.find_by(project_id: project.id).role == "Owner"
+    self.admin || self.memberships.find_by(project_id: project.id).role == "Owner" && self.memberships.find_by(project_id: project.id) != nil
+  end
+
+  def project_member_of(user)
+    user.projects.map(&:users).flatten.include?(self)
   end
 
 end
