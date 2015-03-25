@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe UsersController do
+
   describe "GET #index" do
     it "lists all the users in the table" do
       user = create_user

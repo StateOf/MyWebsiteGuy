@@ -1,9 +1,6 @@
 class TasksController < PrivateController
 
-  before_action do
-    @project = Project.find(params[:project_id])
-  end
-
+  before_action :set_project
   before_action :task_belongs_to_project, only:[:destroy]
 
   def index
@@ -61,6 +58,14 @@ class TasksController < PrivateController
       flash[:error] = "You do not have access to that project"
       redirect_to projects_path
     end
+  end
+
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
+  def set_task
+    @task = Task.where(project_id: project.id).find(params[:id])
   end
 
 end
