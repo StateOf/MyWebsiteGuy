@@ -16,9 +16,8 @@ feature 'Sign up as a new user' do
 
     click_button 'Sign Up'
 
-    expect(current_path).to eq root_path
-    expect(page).to have_content 'You have successfully signed up'
-    expect(page).to have_content 'Your life, organized'
+    expect(current_path).to eq new_project_path
+    
   end
 
   scenario 'guest sees validation message when trying to sign up' do

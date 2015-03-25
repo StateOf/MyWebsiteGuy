@@ -1,7 +1,8 @@
 class TasksController < PrivateController
 
   before_action :set_project
-  before_action :task_belongs_to_project, only:[:destroy]
+  before_action :set_task, only:[:show, :edit, :destroy]
+  before_action :ensure_project_member_or_admin
 
   def index
     @tasks = @project.tasks
@@ -53,19 +54,12 @@ class TasksController < PrivateController
     params.require(:task).permit(:description, :complete, :due_date, :project_id)
   end
 
-  def task_belongs_to_project
-    if !@project.tasks.include?(@task)
-      flash[:error] = "You do not have access to that project"
-      redirect_to projects_path
-    end
-  end
-
   def set_project
     @project = Project.find(params[:project_id])
   end
 
   def set_task
-    @task = Task.where(project_id: project.id).find(params[:id])
+    @task = Task.where(project_id: @project.id).find(params[:id])
   end
 
 end

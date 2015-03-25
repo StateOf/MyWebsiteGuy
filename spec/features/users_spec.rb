@@ -2,9 +2,14 @@ require "rails_helper"
 
 feature 'Existing user can CRUD a User' do
 
-  scenario 'visits root_path, signs in, and goes to User index page' do
+  before :each do
 
-    login
+    user = create_user
+    login(user)
+
+  end
+
+  scenario 'visits root_path, signs in, and goes to User index page' do
 
     click_link 'Users'
     expect(current_path).to eq users_path
@@ -15,7 +20,6 @@ feature 'Existing user can CRUD a User' do
 
   scenario 'can create a new User and see success message' do
 
-    login
 
     click_link 'Users'
     expect(current_path).to eq users_path
@@ -38,7 +42,6 @@ feature 'Existing user can CRUD a User' do
 
   scenario 'can read an existing User' do
 
-    login
 
     click_link 'Users'
 
@@ -55,7 +58,6 @@ feature 'Existing user can CRUD a User' do
 
   scenario 'edit an existing user with success message' do
 
-    login
 
     click_link 'Users'
     expect(current_path).to eq users_path
@@ -66,7 +68,7 @@ feature 'Existing user can CRUD a User' do
 
     click_on 'Edit'
 
-    fill_in :user_first_name, with: 'T'
+    fill_in "First name", with: 'T'
     fill_in :user_last_name, with: 'D'
     fill_in :user_email, with: 'td@broncos.com'
     fill_in :user_password, with: '1234'
@@ -80,25 +82,13 @@ feature 'Existing user can CRUD a User' do
 
   scenario 'delete an existing user with success message' do
 
-    login
+    user1 = create_user(first_name: "Theron", email: "test@gmail.com")
 
     click_link 'Users'
     expect(current_path).to eq users_path
 
-    click_link 'New User'
-
-    expect(current_path).to eq new_user_path
-
-    fill_in :user_first_name, with: 'T'
-    fill_in :user_last_name, with: 'D'
-    fill_in :user_email, with: 'td@broncos.com'
-    fill_in :user_password, with: '1234'
-    fill_in :user_password_confirmation, with: '1234'
-
-    click_button 'Create User'
-
     within '.table' do
-      click_link 'T D'
+      click_link 'Theron'
     end
 
     click_on 'Edit'
@@ -112,7 +102,6 @@ feature 'Existing user can CRUD a User' do
 
   scenario 'can see validations without a first name, last name, and email' do
 
-    login
     click_link 'Users'
     expect(current_path).to eq users_path
     click_link 'New User'

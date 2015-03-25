@@ -4,6 +4,7 @@
     last_name: 'H',
     email: 'testingtesting@gmail.com',
     password: 'password',
+    admin: true
   }.merge(options))
 end
 

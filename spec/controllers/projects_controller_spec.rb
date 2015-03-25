@@ -36,20 +36,6 @@ describe ProjectsController do
 
     end
 
-    it "redirects to projects path if trying to access show" do
-
-      get :edit
-
-      user = create_user
-
-      project_id: create_project.id
-
-      membership.id = nil
-
-      expect(response).to redirect_to projects_path
-
-    end
-
   end
 
   describe "GET #index" do
