@@ -8,7 +8,6 @@ class CommonQuestionsController < ApplicationController
     common_q_2 = CommonQuestion.new("How do I join gCamp?", "As soon as it\'s ready for the public, you\'ll see a signup link in the upper right. Once that\'s there, just click it and fill in the form!", "how-do-i-join-gcamp")
     common_q_3 = CommonQuestion.new("When will gCamp be finished?", "gCamp is a work in progress. That being said, it should be fully functional in the next few weeks. Functional. Check in daily for new features and awesome functionality. It\'s going to blow your mind. Organization is just a click away. Amazing!", "when-will-gcamp-be-finished")
 
-
     @quotes = [common_q_1, common_q_2, common_q_3]
 
   end

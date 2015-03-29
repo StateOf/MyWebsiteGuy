@@ -126,4 +126,20 @@ describe UsersController do
       expect(user.last_name).to eq("Doe")
     end
   end
+
+  describe "permissions" do
+
+    it "redirects to 404 if not current user trying to edit other user" do
+
+      @user = create_user
+      user2 = create_user(first_name: "Gilbert", email: "test@gmail.com", password: "dog", admin: false)
+      session[:user_id] = user2.id
+
+      get :edit, id: @user
+
+      expect(response).to render_template file: '404.html'
+    end
+
+  end
+
 end

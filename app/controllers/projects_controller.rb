@@ -6,6 +6,7 @@ class ProjectsController < PrivateController
 
   def index
     @projects = current_user.projects
+    @projects_admin = Project.all
   end
 
   def show

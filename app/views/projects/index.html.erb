@@ -17,15 +17,28 @@
     </tr>
   </thead>
   <tbody>
-    <% @projects.each do |project| %>
-    <tr>
-      <td class="col-md-6">
-        <%= link_to project.name, project %>
-      </td>
-      <td class="col-md-3">
-        <%= link_to project.tasks.count, project_tasks_path(project) %>
-      </td>
-    </tr>
+    <% if current_user.admin %>
+      <% @projects_admin.each do |project| %>
+        <tr>
+          <td class="col-md-6">
+            <%= link_to project.name, project %>
+          </td>
+          <td class="col-md-3">
+            <%= link_to project.tasks.count, project_tasks_path(project) %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% @projects.each do |project| %>
+      <tr>
+        <td class="col-md-6">
+          <%= link_to project.name, project %>
+        </td>
+        <td class="col-md-3">
+          <%= link_to project.tasks.count, project_tasks_path(project) %>
+        </td>
+      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

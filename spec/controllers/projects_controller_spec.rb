@@ -4,10 +4,10 @@ describe ProjectsController do
 
   before :each do
 
-    user = create_user
-    session[:user_id] = user.id
+    @user = create_user
+    session[:user_id] = @user.id
     @project = create_project
-    membership = create_membership(user, @project)
+    membership = create_membership(@user, @project)
 
   end
 
@@ -55,7 +55,6 @@ describe ProjectsController do
 
   end
 
-
   describe "GET #show" do
     it "assigns the requested project to @project" do
 
@@ -69,6 +68,34 @@ describe ProjectsController do
       get :show, id: @project
       expect(response).to render_template :show
     end
+  end
+
+  describe "permissions" do
+    it "redirects visitors to sign in path" do
+      session.clear
+      get :show, id: @project
+      expect(flash[:error]).to eq "You must sign in"
+      expect(response).to redirect_to sign_in_path
+    end
+
+    it "redirects non-members or admin from project show page to projects path" do
+      session.clear
+      @user1 = create_user(first_name: "Dylan", email: "user1@gmail.com", password: "password", admin: false)
+      session[:user_id] = @user1.id
+      get :show, id: @project
+      expect(flash[:error]).to eq "You do not have access to that project"
+      expect(response).to redirect_to projects_path
+    end
+
+    it "redirects non-owners or admin from project show page to projects path" do
+      session.clear
+      @user1 = create_user(first_name: "Dylan", email: "user1@gmail.com", password: "password", admin: false)
+      session[:user_id] = @user1.id
+      patch :edit, id: @project
+      expect(flash[:error]).to eq "You do not have access to that project"
+      expect(response).to redirect_to projects_path
+    end
+
   end
 
 end
