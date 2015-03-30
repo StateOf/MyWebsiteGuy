@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :memberships
   end
 
+  resources :tracker_projects, only:[:show]
+
   get '/sign-up' => 'registrations#new', as: :signup
   post '/sign-up' => 'registrations#create'
   get '/sign-in' => 'authentication#new', as: :signin

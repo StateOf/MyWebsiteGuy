@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails_12factor', '~> 0.0.3', group: :production
-
+gem 'faraday', '~> 0.9.0'
 gem 'bootstrap-sass', '~> 3.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -46,5 +46,5 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'pry', '~> 0.10.1'
-  
+
 end

@@ -1,0 +1,42 @@
+<div class="header">
+  <div class="pull-right">
+    (showing first 500)
+  </div>
+  <h1>
+    <%= "Stories for #{@project}" %>
+  </h1>
+</div>
+
+
+
+
+<table class="table table-striped" >
+  <thead>
+    <tr>
+      <th>Story</th>
+      <th>Estimate</th>
+      <th>Labels</th>
+      <th>Current State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if current_user.tracker_token %>
+      <% @stories.first(500).each do |story| %>
+      <tr>
+        <td>
+          <%= story[:name] %>
+        </td>
+        <td>
+          <%= story[:estimate] %>
+        </td>
+        <td>
+          <%= story[:labels].map { |label| label[:name] }.join(", ") %>
+        </td>
+        <td>
+          <%= story[:current_state] %>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+  </tbody>
+</table>

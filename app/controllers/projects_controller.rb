@@ -7,6 +7,8 @@ class ProjectsController < PrivateController
   def index
     @projects = current_user.projects
     @projects_admin = Project.all
+    tracker_api = TrackerAPI.new
+    @tracker_projects = tracker_api.projects(current_user.tracker_token)
   end
 
   def show

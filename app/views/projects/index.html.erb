@@ -42,3 +42,27 @@
     <% end %>
   </tbody>
 </table>
+<div class="page-header">
+  <h1>Pivotal Tracker Projects</h1>
+</div>
+
+<table class= "table">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tracker_projects.each do |project| %>
+      <tr>
+        <td class= "col-md-6">
+          <%= link_to project[:name], tracker_project_path( project[:id], project_name: project[:name]) %>
+        </td>
+        <td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

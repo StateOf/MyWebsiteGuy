@@ -28,5 +28,11 @@
   <dd>
     <%= mail_to @user.email %>
   </dd>
+  <dt>
+    Pivotal Tracker Token
+  </dt>
+  <dd>
+    <%= @user.tracker_token.gsub(/.(?<=.....)/, '*') %>
+  </dd>
 <% end %>
 </dl>
