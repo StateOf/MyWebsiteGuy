@@ -113,6 +113,41 @@ describe MembershipsController do
       expect(flash[:error]).to eq "You do not have access"
       expect(response).to redirect_to projects_path
     end
+
+    it "has at least one owner for a project's membership" do
+
+      user1 = create_user(first_name: "Jennifer", last_name: "Greatest", email: "user1@gmail.com", password: "password", admin: true)
+      user2 = create_user(first_name: "Steve", last_name: "Lonely", email: "lonelysteve@gmail.com", password: "sad", admin: false )
+      project2 = create_project(name: "Find Steve a life")
+      membership1 = create_membership(user1, project2, role: "Member")
+      membership2 = create_membership(user2, project2, role: "Owner")
+      session[:user_id] = user1.id
+
+      expect {
+        delete :destroy, project_id: project2.id, id: membership2.id, membership: {role: "Owner"}
+      }.to_not change{Membership.all.count}
+
+      expect(flash[:error]).to eq "Projects must have at least one owner"
+      expect(response).to redirect_to project_memberships_path
+    end
+
+    it "has at least one owner for a project's membership" do
+
+      user1 = create_user(first_name: "Jennifer", last_name: "Greatest", email: "user1@gmail.com", password: "password", admin: true)
+      user2 = create_user(first_name: "Steve", last_name: "Lonely", email: "lonelysteve@gmail.com", password: "sad", admin: false )
+      project2 = create_project(name: "Find Steve a life")
+      membership1 = create_membership(user1, project2, role: "Member")
+      membership2 = create_membership(user2, project2, role: "Owner")
+      session[:user_id] = user1.id
+
+      expect {
+        patch :update, project_id: project2.id, id: membership2.id, membership: {role: "Member"}
+      }.to_not change{membership2.reload.role}
+
+      expect(flash[:error]).to eq "Projects must have at least one owner"
+      expect(response).to redirect_to project_memberships_path
+    end
+
   end
 
 end

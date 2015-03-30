@@ -1,6 +1,10 @@
 <div class="header">
   <div class="pull-right">
-    (showing first 500)
+  <% if @stories.count <= 500 %>
+    <%= "(showing #{@stories.count})" %>
+  <% else %>
+    <%= "(showing first 500)" %>
+  <% end %>
   </div>
   <h1>
     <%= "Stories for #{@project}" %>
