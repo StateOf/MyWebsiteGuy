@@ -32,7 +32,9 @@
     Pivotal Tracker Token
   </dt>
   <dd>
-    <%= @user.tracker_token.gsub(/.(?<=.....)/, '*') %>
+    <% if @user.tracker_token? %>
+      <%= @user.tracker_token.gsub(/.(?<=.....)/, '*') %>
+    <% end %>
   </dd>
 <% end %>
 </dl>
