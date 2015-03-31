@@ -1,6 +1,6 @@
 class UsersController < PrivateController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :current_user_404, only: [:edit, :udpate]
+  before_action :current_user_404, only: [:edit, :update]
 
   def index
     @users = User.all
