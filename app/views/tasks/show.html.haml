@@ -29,7 +29,7 @@
     .row
       .col-md-3
         = link_to "#{comment.user.full_name}", user_path
-        %p.text-muted= "#{time_aga_in_words(comment.created_at)} ago"
+        %p.text-muted= "#{time_ago_in_words(comment.created_at)} ago"
       .col-md-9= comment.message
 
 .row
@@ -39,4 +39,3 @@
         = f.text_area :message, class: "form-control"
       .form-group
         = f.submit "Add Comment", class: "btn btn-primary"
-        
