@@ -1,0 +1,23 @@
+.header
+  .pull-right
+    - if @stories.count <= 500
+      = "(showing #{@stories.count})"
+    - else
+      = "(showing first 500)"
+  %h1= "Stories for #{@project}"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Story
+      %th Estimate
+      %th Labels
+      %th Current State
+  %tbody
+    - if current_user.tracker_token
+      - @stories.first(500).each do |story|
+        %tr
+          %td= story[:name]
+          %td= story[:estimate]
+          %td= story[:labels].map { |label| label[:name] }.join(", ")
+          %td= story[:current_state]

@@ -1,0 +1,29 @@
+.page-header
+  .pull-right
+    = link_to 'New Task', new_project_task_path, class: "btn btn-info"
+  %h1= "Tasks for #{@project.name}"
+
+%ol.breadcrumb
+  %li= link_to 'Projects', projects_path
+  %li= link_to @project.name, project_path(@project)
+  %li.active Tasks
+
+%table.table
+  %thead
+    %tr
+      %th Description
+      %th Due On
+      %th
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td.col-md-2
+          - if task.complete
+            %s= link_to task.description, project_task_path(@project, task)
+          - else
+            = link_to task.description, project_task_path(@project, task)
+            %span.badge= task.comments.count
+        %td.col-md-2= task.due_date.try(:strftime, "%m/%d/%Y")
+        %td.col-md-2.text-right
+          = link_to 'Edit', edit_project_task_path(@project, task), class: "btn btn-info"
+          = link_to '', project_task_path(@project, task), method: :delete, data: {confirm: "Are you sure?"}, class: "glyphicon glyphicon-remove"
