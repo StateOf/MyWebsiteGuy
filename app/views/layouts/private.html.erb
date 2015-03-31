@@ -44,15 +44,15 @@
 
     <div class="container">
 
-    <% if flash[:error] %>
-      <div class="alert alert-danger text-left"><%= flash[:error] %></div>
-    <% end %>
+      <% if flash[:error] %>
+        <div class="alert alert-danger text-left"><%= flash[:error] %></div>
+      <% end %>
 
-    <% if flash[:message] %>
-      <div class="alert alert-success text-left"><%= flash[:message] %></div>
-    <% end %>
+      <% if flash[:message] %>
+        <div class="alert alert-success text-left"><%= flash[:message] %></div>
+      <% end %>
 
-    <%= yield  %>
+      <%= yield  %>
 
     </div>
 
@@ -68,6 +68,6 @@
         <%= link_to "FAQ", "/faq" %>
       </div>
     </footer>
-    
+
   </body>
 </html>

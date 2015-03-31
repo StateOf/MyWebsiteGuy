@@ -1,9 +1,0 @@
-.page-header
-  %h1 Edit User
-
-= render partial: "form", locals: {name_of_button: "Update User"}
-
-.row
-  .col-md-6.col-md-offset-2
-    .text-center.well
-      = link_to "Delete user", user_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
