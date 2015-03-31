@@ -10,4 +10,4 @@
     %p Human collaboration and communication is what drives us, and it infuses every feature of gCamp.
 
 %h4 gCamp is extremely active. Check out our killer stats below!
-%h4= pluralize(@projects.count, "Project"), =pluralize(@tasks.count, "Task"), =pluralize(@memberships.count, "Project Member"), =pluralize(@users.count, "User"), =pluralize(@comments.count, "Comment")
+%h4= "#{pluralize(@projects.count, "Project")}, #{pluralize(@tasks.count, "Task")}, #{pluralize(@memberships.count, "Project Member")}, #{pluralize(@users.count, "User")}, #{pluralize(@comments.count, "Comment")}"

@@ -1,12 +1,12 @@
 .well.col-md-6.col-md-offset-3
   .page-header
-    %h2 Sign up for gCamp!
+  %h2 Sign up for gCamp!
 
   = form_for @user, url: signup_path do |f|
 
     - @user.errors.present?
       - @user.errors.full_messages.each do |message|
-        %h5.text-danger= message
+      %h5.text-danger= message
 
     .form-group
       = f.label :first_name, 'First Name', class: "control-label"

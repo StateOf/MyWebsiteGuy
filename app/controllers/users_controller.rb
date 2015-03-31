@@ -46,7 +46,7 @@ class UsersController < PrivateController
 
   def user_params
     if current_user.admin
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :tracker_token :admin)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :tracker_token, :admin)
     else
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :tracker_token)
     end
