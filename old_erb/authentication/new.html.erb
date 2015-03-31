@@ -1,25 +1,28 @@
 <div class="well col-md-6 col-md-offset-3">
-    <div class="page-header">
-      <h2>Sign into gCamp</h2>
-    </div>
+  <div class="page-header">
+    <h2>Sign into gCamp</h2>
+  </div>
 
-    <%= form_tag signin_path do |f| %>
+  <%= form_tag signin_path do |f| %>
 
-      <% if flash[:warning] %>
-        <h5 class="text-danger"><%= flash[:warning] %></h5>
-      <% end %>
+    <% if flash[:warning] %>
+      <h5 class="text-danger"><%= flash[:warning] %></h5>
+    <% end %>
 
     <div class="form-group">
       <%= label_tag :email, "Email", class:"control-label" %>
       <%= email_field_tag :email, "", class:"form-control" %>
     </div>
+
     <div class="form-group">
       <%= label_tag :password, "Password", class:"control-label" %>
       <%= password_field_tag :password, "", class:"form-control" %>
     </div>
+
     <div class="form-group">
       <%= submit_tag "Sign In", class: "btn btn-default" %>
     </div>
-    <% end %>
+    
+  <% end %>
 
 </div>

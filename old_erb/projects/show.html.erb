@@ -1,8 +1,8 @@
 <div class= "page-header">
   <% if current_user.owner_admin?(@project) %>
-  <div class="pull-right">
-    <%= link_to 'Edit', edit_project_path(@project), class:"btn btn-info" %>
-  </div>
+    <div class="pull-right">
+      <%= link_to 'Edit', edit_project_path(@project), class:"btn btn-info" %>
+    </div>
   <% end %>
   <h1>
     <%= @project.name %>
@@ -25,6 +25,6 @@
   <div class="well">
       <h3>Delete Project</h3>
       <p>Deleting this project will also delete <%= pluralize(@project.memberships.count, "membership") %>, <%= pluralize(@project.tasks.count, "task") %> and associated comments.</p>
-      <%= link_to "Delete", project_path(@project), method: :delete, data: {cofirm: "Are you sure?"}, class:"btn btn-danger" %>
+      <%= link_to "Delete", project_path(@project), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger" %>
   </div>
 <% end %>

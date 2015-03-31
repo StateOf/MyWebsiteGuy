@@ -8,6 +8,7 @@
     <%= @user.first_name %> <%= @user.last_name %>
   </h1>
 </div>
+
 <dl class="dl-horizontal">
   <dt>
     First Name
@@ -22,19 +23,19 @@
     <%= @user.last_name %>
   </dd>
   <% if current_user.admin || current_user.project_member_of(@user) %>
-  <dt>
-    Email
-  </dt>
-  <dd>
-    <%= mail_to @user.email %>
-  </dd>
-  <dt>
-    Pivotal Tracker Token
-  </dt>
-  <dd>
-    <% if @user.tracker_token? %>
-      <%= @user.tracker_token.gsub(/.(?<=.....)/, '*') %>
-    <% end %>
-  </dd>
-<% end %>
+    <dt>
+      Email
+    </dt>
+    <dd>
+      <%= mail_to @user.email %>
+    </dd>
+    <dt>
+      Pivotal Tracker Token
+    </dt>
+    <dd>
+      <% if @user.tracker_token? %>
+        <%= @user.tracker_token.gsub(/.(?<=.....)/, '*') %>
+      <% end %>
+    </dd>
+  <% end %>
 </dl>

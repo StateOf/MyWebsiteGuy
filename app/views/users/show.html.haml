@@ -1,0 +1,19 @@
+.page-header
+  - if current_user.id == @user.id || current_user.admin
+    .pull-right
+      = link_to 'Edit', edit_user_path(@user), class: "btn btn_info"
+  %h1= @user.full_name
+
+%dl.dl-horizontal
+  %dt First Name
+  %dd= @user.first_name
+  %dt Last Name
+  %dd= @user.last_name
+  - if current_user.admin || current_user.project_member_of(@user)
+    %dt Email
+    %dd= mail_to @user.email
+    %dt Pivotal Tracker Token
+    %dd
+      - if @user.tracker_token?
+        = @user.tracker_token.gsub(/.(?<=.....)/, '*')
+        
