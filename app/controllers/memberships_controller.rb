@@ -4,8 +4,8 @@ class MembershipsController < PrivateController
   before_action :set_membership, only: [:update, :destroy]
   before_action :ensure_project_member_or_admin
   before_action :membership_and_owner, only:[:update, :destroy]
-  before_action :ensure_admin_or_owner_or_self_user, only: [ :destroy]
-  before_action :ensure_project_owner_or_admin, only:[:create, :update]
+  before_action :ensure_admin_or_owner_or_self_user, only: [:destroy]
+  before_action :ensure_project_owner_or_admin, only:[:create, :update, :destroy]
 
 
   def index
