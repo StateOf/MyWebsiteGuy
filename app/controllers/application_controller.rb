@@ -40,7 +40,6 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_admin_or_owner_or_self_user
-binding.pry
     if !(current_user.owner_admin?(@project) || current_user.id == @membership.user_id)
       flash[:error] = "You do not have access"
       redirect_to projects_path

@@ -89,7 +89,7 @@ describe MembershipsController do
       session[:user_id] = user1.id
       membership2 = create_membership(user1, @project, role: "Member")
       membership3 = create_membership(user2, @project, role: "Owner")
-binding.pry
+
       expect {
         delete :destroy, project_id: @project.id, id: membership2.id
       }.to change{ Membership.all.count }.by(-1)
