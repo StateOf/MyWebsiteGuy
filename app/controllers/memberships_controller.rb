@@ -5,7 +5,7 @@ class MembershipsController < PrivateController
   before_action :ensure_project_member_or_admin
   before_action :membership_and_owner, only:[:update, :destroy]
   before_action :ensure_admin_or_owner_or_self_user, only: [:destroy]
-  before_action :ensure_project_owner_or_admin, only:[:create, :update, :destroy]
+  before_action :ensure_project_owner_or_admin, only:[:create, :update]
 
 
   def index
@@ -52,7 +52,7 @@ class MembershipsController < PrivateController
   end
 
   def set_membership
-    @membership = Membership.find(params[:id])
+    @membership = Membership.where(project_id: @project.id).find(params[:id])
   end
 
   def membership_and_owner

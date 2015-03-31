@@ -82,16 +82,17 @@ describe MembershipsController do
 
     end
 
-    it "membership and self only can delete project's membership for self and redirects to projects path" do
+    it "can delete project's membership for self and redirects to projects path" do
       session.clear
+      user2 = create_user(first_name: "Gilbert", email: "user2@gmail.com", password: "password", admin: false)
       user1 = create_user(first_name: "Dylan", email: "user1@gmail.com", password: "password", admin: false)
       session[:user_id] = user1.id
       membership2 = create_membership(user1, @project, role: "Member")
-
+      membership3 = create_membership(user2, @project, role: "Owner")
+binding.pry
       expect {
         delete :destroy, project_id: @project.id, id: membership2.id
-
-      }.to change { Membership.all.count }.by(-1)
+      }.to change{ Membership.all.count }.by(-1)
 
       expect(flash[:message]).to eq "#{membership2.user.full_name} was successfully removed"
       expect(response).to redirect_to projects_path
