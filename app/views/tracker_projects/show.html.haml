@@ -17,7 +17,7 @@
     - if current_user.tracker_token
       - @stories.first(500).each do |story|
         %tr
-          %td= story[:name]
+          %td= link_to story[:name], story[:url]
           %td= story[:estimate]
           %td= story[:labels].map { |label| label[:name] }.join(", ")
           %td= story[:current_state]
