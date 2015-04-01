@@ -41,7 +41,7 @@ describe MembershipsController do
 
     end
 
-    it "redirects non-owner or admin from membership index to projects path" do
+    it "redirects non-owner or non-admin from membership index to projects path" do
 
       session.clear
       @user1 = create_user(first_name: "Dylan", email: "user1@gmail.com", password: "password", admin: false)
