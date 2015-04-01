@@ -11,7 +11,7 @@ class ProjectsController < PrivateController
     if current_user.tracker_token?
       @tracker_projects = tracker_api.projects(current_user.tracker_token)
       if @tracker_projects == 403
-        flash.now[:error] == "Pivotal Tracker token is invalid"
+        flash.now[:error] = "Pivotal Tracker Token is invalid"
       end
     end
   end
