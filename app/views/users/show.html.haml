@@ -12,7 +12,7 @@
   - if current_user.admin || current_user.project_member_of(@user)
     %dt Email
     %dd= mail_to @user.email
-    %dt Pivotal Tracker Token
-    %dd
-      - if @user.tracker_token?
-        = @user.tracker_token.gsub(/.(?<=.....)/, '*')
+  %dt Pivotal Tracker Token
+  %dd
+    - if @user.tracker_token?
+      = @user.tracker_token.gsub(/.(?<=.....)/, '*')
