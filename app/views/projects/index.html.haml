@@ -20,7 +20,7 @@
           %td.col-md-6= link_to project.name, project
           %td.col-md-3= link_to project.tasks.count, project_tasks_path(project)
 
-- if current_user.tracker_token?
+- if current_user.tracker_token
   .page-header
     %h1 Pivotal Tracker Projects
 
