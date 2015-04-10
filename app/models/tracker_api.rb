@@ -2,6 +2,7 @@ class TrackerAPI
 
   def initialize
     @conn = Faraday.new(:url => 'https://www.pivotaltracker.com')
+
   end
 
   def projects(token)
